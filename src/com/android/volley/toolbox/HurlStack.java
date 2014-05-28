@@ -89,7 +89,7 @@ public class HurlStack implements HttpStack {
             throws IOException, AuthFailureError {
         String url = request.getUrl();
         HashMap<String, String> map = new HashMap<String, String>();
-        map.putAll(request.getHeaders());
+        map.putAll(request.getHeaders());//可以重写getHeaders方法添加HTTP请求头信息
         map.putAll(additionalHeaders);
         if (mUrlRewriter != null) {
             String rewritten = mUrlRewriter.rewriteUrl(url);

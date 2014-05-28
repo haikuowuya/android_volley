@@ -138,7 +138,6 @@ public class NetworkDispatcher extends Thread
 					mCache.put(request.getCacheKey(), response.cacheEntry);
 					request.addMarker("network-cache-written");
 				}
-
 				// Post the response back.
 				request.markDelivered();
 				mDelivery.postResponse(request, response);
