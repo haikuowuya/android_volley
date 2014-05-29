@@ -25,6 +25,8 @@ import java.util.Set;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.android.volley.request.Request;
+
 /**
  * A request dispatch queue with a thread pool of dispatchers.
  * Calling {@link #add(Request)} will enqueue the given Request for dispatch,
@@ -286,7 +288,7 @@ public class RequestQueue
 	 * Releases waiting requests for <code>request.getCacheKey()</code> if <code>request.shouldCache()</code>.
 	 * </p>
 	 */
-	void finish(Request<?> request)
+	public void finish(Request<?> request)
 	{
 		// Remove from the set of requests currently being processed.
 		synchronized (mCurrentRequests)

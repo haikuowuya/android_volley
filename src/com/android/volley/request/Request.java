@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.volley;
+package com.android.volley.request;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -28,7 +28,13 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.text.TextUtils;
 
-import com.android.volley.VolleyLog.MarkerLog;
+import com.android.volley.Cache;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyLog;
 import com.android.volley.error.AuthFailureError;
 import com.android.volley.error.TimeoutError;
 import com.android.volley.error.VolleyError;
@@ -61,7 +67,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     }
 
     /** An event log tracing the lifetime of this request; for debugging. */
-    private final MarkerLog mEventLog = MarkerLog.ENABLED ? new MarkerLog() : null;
+    private final VolleyLog.MarkerLog mEventLog = VolleyLog.MarkerLog.ENABLED ? new VolleyLog.MarkerLog() : null;
 
     /**
      * Request method of this request.  Currently supports GET, POST, PUT, DELETE, HEAD, OPTIONS,
@@ -203,7 +209,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
      * Adds an event to this request's event log; for debugging.
      */
     public void addMarker(String tag) {
-        if (MarkerLog.ENABLED) {
+        if (VolleyLog.MarkerLog.ENABLED) {
             mEventLog.add(tag, Thread.currentThread().getId());
         } else if (mRequestBirthTime == 0) {
             mRequestBirthTime = SystemClock.elapsedRealtime();
@@ -215,11 +221,11 @@ public abstract class Request<T> implements Comparable<Request<T>> {
      *
      * <p>Also dumps all events from this request's event log; for debugging.</p>
      */
-    void finish(final String tag) {
+    public void finish(final String tag) {
         if (mRequestQueue != null) {
             mRequestQueue.finish(this);
         }
-        if (MarkerLog.ENABLED) {
+        if (VolleyLog.MarkerLog.ENABLED) {
             final long threadId = Thread.currentThread().getId();
             if (Looper.myLooper() != Looper.getMainLooper()) {
                 // If we finish marking off of the main thread, we need to
@@ -532,7 +538,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
      * @param response Response from the network
      * @return The parsed response, or null in the case of an error
      */
-    abstract protected Response<T> parseNetworkResponse(NetworkResponse response);
+       public  abstract Response<T> parseNetworkResponse(NetworkResponse response);
 
     /**
      * Subclasses can override this method to parse 'networkError' and return a more specific error.
@@ -542,7 +548,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
      * @param volleyError the error retrieved from the network
      * @return an NetworkError augmented with additional information
      */
-    protected VolleyError parseNetworkError(VolleyError volleyError) {
+    public VolleyError parseNetworkError(VolleyError volleyError) {
         return volleyError;
     }
 
@@ -553,7 +559,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
      * @param response The parsed response returned by
      * {@link #parseNetworkResponse(NetworkResponse)}
      */
-    abstract protected void deliverResponse(T response);
+    public abstract void deliverResponse(T response);
 
     /**
      * Delivers error message to the ErrorListener that the Request was

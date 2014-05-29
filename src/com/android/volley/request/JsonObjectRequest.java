@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.volley.request;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.error.ParseError;
+import com.android.volley.toolbox.HttpHeaderParser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,7 +62,7 @@ public class JsonObjectRequest extends JsonRequest<JSONObject> {
     }
 
     @Override
-    protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+    public Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
         try {
             String jsonString =
                 new String(response.data, HttpHeaderParser.parseCharset(response.headers));

@@ -18,7 +18,6 @@ import android.os.SystemClock;
 import com.android.volley.Cache;
 import com.android.volley.Network;
 import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyLog;
 import com.android.volley.error.AuthFailureError;
@@ -27,6 +26,7 @@ import com.android.volley.error.NoConnectionError;
 import com.android.volley.error.ServerError;
 import com.android.volley.error.TimeoutError;
 import com.android.volley.error.VolleyError;
+import com.android.volley.request.Request;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;

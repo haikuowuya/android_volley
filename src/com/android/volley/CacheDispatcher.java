@@ -17,6 +17,8 @@ import android.os.Process;
 
 import java.util.concurrent.BlockingQueue;
 
+import com.android.volley.request.Request;
+
 /**
  * Provides a thread for performing cache triage on a queue of requests.
  * Requests added to the specified cache queue are resolved from cache.

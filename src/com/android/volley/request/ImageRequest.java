@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.volley.request;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyLog;
 import com.android.volley.error.ParseError;
+import com.android.volley.toolbox.HttpHeaderParser;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -119,7 +119,7 @@ public class ImageRequest extends Request<Bitmap> {
     }
 
     @Override
-    protected Response<Bitmap> parseNetworkResponse(NetworkResponse response) {
+    public Response<Bitmap> parseNetworkResponse(NetworkResponse response) {
         // Serialize all decode on a global lock to reduce concurrent heap usage.
         synchronized (sDecodeLock) {
             try {
@@ -182,7 +182,7 @@ public class ImageRequest extends Request<Bitmap> {
     }
 
     @Override
-    protected void deliverResponse(Bitmap response) {
+    public void deliverResponse(Bitmap response) {
         mListener.onResponse(response);
     }
 

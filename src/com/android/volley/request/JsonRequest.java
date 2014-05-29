@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.volley.request;
 
 import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -61,12 +60,12 @@ public abstract class JsonRequest<T> extends Request<T> {
     }
 
     @Override
-    protected void deliverResponse(T response) {
+    public void deliverResponse(T response) {
         mListener.onResponse(response);
     }
 
     @Override
-    abstract protected Response<T> parseNetworkResponse(NetworkResponse response);
+      abstract  public  Response<T> parseNetworkResponse(NetworkResponse response);
 
     /**
      * @deprecated Use {@link #getBodyContentType()}.

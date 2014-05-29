@@ -16,9 +16,9 @@
 
 package com.android.volley.toolbox;
 
-import com.android.volley.Request;
-import com.android.volley.Request.Method;
 import com.android.volley.error.AuthFailureError;
+import com.android.volley.request.Request;
+import com.android.volley.request.Request.Method;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

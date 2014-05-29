@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.volley.request;
 
 import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.HttpHeaderParser;
 
 import java.io.UnsupportedEncodingException;
 
@@ -56,12 +56,12 @@ public class StringRequest extends Request<String> {
     }
 
     @Override
-    protected void deliverResponse(String response) {
+    public void deliverResponse(String response) {
         mListener.onResponse(response);
     }
 
     @Override
-    protected Response<String> parseNetworkResponse(NetworkResponse response) {
+    public Response<String> parseNetworkResponse(NetworkResponse response) {
         String parsed;
         try {
             parsed = new String(response.data, HttpHeaderParser.parseCharset(response.headers));

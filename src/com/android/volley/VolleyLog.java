@@ -100,7 +100,7 @@ public class VolleyLog {
     /**
      * A simple event log with records containing a name, thread ID, and timestamp.
      */
-    static class MarkerLog {
+   public  static class MarkerLog {
         public static final boolean ENABLED = VolleyLog.DEBUG;
 
         /** Minimum duration from first marker to last in an marker log to warrant logging. */

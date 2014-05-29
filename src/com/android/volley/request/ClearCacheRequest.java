@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.volley.request;
 
 import com.android.volley.Cache;
 import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
 import com.android.volley.Response;
 
 import android.os.Handler;
@@ -60,11 +59,11 @@ public class ClearCacheRequest extends Request<Object> {
     }
 
     @Override
-    protected Response<Object> parseNetworkResponse(NetworkResponse response) {
+    public Response<Object> parseNetworkResponse(NetworkResponse response) {
         return null;
     }
 
     @Override
-    protected void deliverResponse(Object response) {
+    public void deliverResponse(Object response) {
     }
 }

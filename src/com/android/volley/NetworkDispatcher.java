@@ -21,6 +21,7 @@ import android.os.Process;
 import java.util.concurrent.BlockingQueue;
 
 import com.android.volley.error.VolleyError;
+import com.android.volley.request.Request;
 
 /**
  * Provides a thread for performing network dispatch from a queue of requests.
